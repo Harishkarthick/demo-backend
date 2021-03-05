@@ -25,7 +25,8 @@ module.exports = {
                     }
                 }
             }).populate('photos.media').skip(skip).limit(limit);
-            res.send({statusCode : 200, apiStatus: true,result : val, message : 'Data Found!'})
+            if (val.length == 0) return res.send({statusCode : 200, apiStatus: true,result : val, message : 'Data Not Found!'})
+            return res.send({statusCode : 200, apiStatus: true,result : val, message : 'Data Found!'})
         } catch (error) {
             console.log(error);
             return res.send(errormsg)
